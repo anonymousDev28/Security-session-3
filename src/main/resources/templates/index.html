@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>HomePage</h1>
+    <!-- chua login -->
+    <th:block sec:authorize="not isAuthenticated()">
+        <a th:href="@{/login}">Login</a>
+    </th:block>
+    <!--  da login   -->
+
+    <th:block sec:authorize = "isAuthenticated()">
+        <h1>Xin Chào : <span sec:authentication="name"></span></h1>
+        <form th:action="@{/logout}" method="POST">
+            <button>Logout</button>
+        </form>
+        <!--    Menu tương ứng với user-->
+        <ul>
+            <li sec:authorize="hasAnyRole('USER', 'ADMIN')">
+                <a th:href="@{/user}">User page</a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin}">Admin page</a>
+            </li>
+            <li sec:authorize="hasRole('AUTHOR')">
+                <a th:href="@{/author}">Author page</a>
+            </li>
+        </ul>
+    </th:block>
+<!--    <ul>-->
+<!--        <li sec:authorize="hasAnyRole('USER','ADMIN')">-->
+<!--            <a th:href="@{/user}">user page</a>-->
+<!--        </li>-->
+<!--        <li sec:authorize="hasRole('USER')">-->
+<!--            <a th:href="@{/admin}">admin page</a>-->
+<!--        </li>-->
+<!--        <li sec:authorize="hasRole('AUTHOR')">-->
+<!--            <a th:href="@{/author}">author page</a>-->
+<!--        </li>-->
+<!--    </ul>-->
+
+</body>
+</html>
