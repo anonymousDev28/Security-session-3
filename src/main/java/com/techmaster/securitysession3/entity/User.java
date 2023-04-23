@@ -29,7 +29,7 @@ public class User implements UserDetails {
     private String password;
     private boolean enable = false;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name = "Users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "roles_id"))

@@ -3,7 +3,6 @@ package com.techmaster.securitysession3.controller;
 import com.techmaster.securitysession3.request.LoginRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,7 +35,7 @@ public class AuthController {
             // create session
             session.setAttribute("MY_SESSION", authentication.getName());
 
-            return ResponseEntity.ok("Login success !!!");
+            return ResponseEntity.ok("/index2.html");
         }
         catch (Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());

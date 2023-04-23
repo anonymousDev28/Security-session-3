@@ -1,5 +1,6 @@
 package com.techmaster.securitysession3;
 
+import com.mysql.cj.xdevapi.SessionFactory;
 import com.techmaster.securitysession3.entity.Role;
 import com.techmaster.securitysession3.entity.User;
 import com.techmaster.securitysession3.repository.RoleRepository;
@@ -31,27 +32,30 @@ class SecuritySession3ApplicationTests {
     }
     @Test
     void contextLoads() {
-        Role roleUser = roleRepository.findById(3).orElse(null);
-        Role roleAdmin = roleRepository.findById(2).orElse(null);
-        Role roleAuthor = roleRepository.findById(4).orElse(null);
+        Role roleUser = roleRepository.findById(2).orElse(null);
+//        Role roleAdmin = roleRepository.findById(1).orElse(null);
+//        Role roleAuthor = roleRepository.findById(3).orElse(null);
+//        Role roleUser = Role.builder().name("USER").build();
+        System.out.println(roleUser.getName());
         User user = User.builder()
                 .name("quang")
                 .email("user")
                 .password(encoder.encode("123456"))
-                .roles(List.of(Objects.requireNonNull(roleUser))).build();
-        User admin = User.builder()
-                .name("mai")
-                .email("admin")
-                .password(encoder.encode("123456"))
-                .roles(List.of(roleUser, Objects.requireNonNull(roleAdmin))).build();
-        User author = User.builder()
-                .name("Ha")
-                .email("author")
-                .password(encoder.encode("234234"))
-                .roles(List.of(Objects.requireNonNull(roleAuthor))).build();
+                .enable(true)
+                .roles(List.of(roleUser)).build();
+//        User admin = User.builder()
+//                .name("mai")
+//                .email("admin")
+//                .password(encoder.encode("123456"))
+//                .roles(List.of(roleUser, Objects.requireNonNull(roleAdmin))).build();
+//        User author = User.builder()
+//                .name("Ha")
+//                .email("author")
+//                .password(encoder.encode("234234"))
+//                .roles(List.of(Objects.requireNonNull(roleAuthor))).build();
         userRepository.save(user);
-        userRepository.save(admin);
-        userRepository.save(author);
+//        userRepository.save(admin);
+//        userRepository.save(author);
     }
 
 }
